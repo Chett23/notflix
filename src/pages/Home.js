@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import { StarIcon } from "@heroicons/react/24/solid";
+import MediaCard from "../components/MediaCard";
 
 export const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -27,6 +27,7 @@ export const Home = () => {
     )
       .then((response) => response.json())
       .then((response) => {
+        console.log(response.results);
         setMovies(response.results);
       })
       .catch((err) => console.error(err));
@@ -49,6 +50,7 @@ export const Home = () => {
     )
       .then((response) => response.json())
       .then((response) => {
+        console.log(response.results);
         setShows(response.results);
       })
       .catch((err) => console.error(err));
@@ -99,26 +101,7 @@ export const Home = () => {
         <p className="text-font-50 text-xl font-bold">Popular Movies</p>
         <div className="scrollbar-hide flex max-w-full gap-6 overflow-scroll">
           {movies?.map((movie) => (
-            <div
-              className="group relative mx-auto min-w-48 rounded-md"
-              key={movie.id}
-            >
-              <img
-                alt={movie.id}
-                src={`http://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                className="rounded-md"
-              />
-              <div className="bg-accent-900 absolute inset-0 rounded-md opacity-0 group-hover:opacity-40 "></div>
-              <div className="bg-accent-900 absolute inset-0 top-10 z-10 flex w-96 cursor-pointer flex-col justify-end gap-2 text-left opacity-0 group-hover:opacity-100">
-                {/* <p className="text-font-50 font-bold">{movie.title}</p> */}
-                <div className="flex w-full flex-row items-center justify-center gap-4">
-                  <StarIcon className="h-8 w-8 text-yellow-500" />
-                  <p className="text-font-50 font-bold">
-                    {Math.round(movie.vote_average * 10) / 10} / 10
-                  </p>
-                </div>
-              </div>
-            </div>
+            <MediaCard key={movie.id} media={movie} />
           ))}
         </div>
       </div>
@@ -127,14 +110,7 @@ export const Home = () => {
         <p className="text-font-50 text-xl font-bold">Popular TV Shows</p>
         <div className="scrollbar-hide flex max-w-full gap-6 overflow-scroll">
           {shows?.map((show) => (
-            <div className="b min-w-48 rounded-md" key={show.id}>
-              <img
-                alt={show.id}
-                src={`http://image.tmdb.org/t/p/original/${show?.poster_path}`}
-                className="rounded-md"
-              />
-              <p className="text-font-50">{show.name}</p>
-            </div>
+            <MediaCard key={show.id} media={show}/>
           ))}
         </div>
       </div>
