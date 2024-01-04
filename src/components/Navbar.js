@@ -1,8 +1,14 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import netflix_logo from "../images/netflix_assets/Netflix_Logo_RGB.png";
 import { UserIcon } from "@heroicons/react/24/solid";
-import { MagnifyingGlassIcon, BellIcon } from "@heroicons/react/24/outline";
+import {
+  MagnifyingGlassIcon,
+  BellIcon,
+  Bars3Icon,
+} from "@heroicons/react/24/outline";
 
 import { useScrollPosition } from "../utils/useScrollPosition";
 import { useWindowDimensions } from "../utils/useWindowDimensions";
@@ -19,18 +25,48 @@ export const Navbar = () => {
     >
       <div className={"flex flex-row items-center space-x-6 p-4"}>
         <img src={netflix_logo} className={"w-24"} alt="netflix logo" />
-        {width <= 870 ? (
-          <></>
+        {width <= 900 ? (
+          <>
+            <Bars3Icon className="text-font-50" />
+          </>
         ) : (
           <>
-            <p className="text-xs text-font-50 md:text-sm ">Home</p>
-            <p className="text-xs text-font-50 md:text-sm ">TV Shows</p>
-            <p className="text-xs text-font-50 md:text-sm ">Movies</p>
-            <p className="text-xs text-font-50 md:text-sm ">New & popular</p>
-            <p className="text-xs text-font-50 md:text-sm ">My List</p>
-            <p className="text-xs text-font-50 md:text-sm ">
+            <Link
+              to={"/"}
+              className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
+            >
+              Home
+            </Link>
+            <Link
+              to={"shows"}
+              className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
+            >
+              TV Shows
+            </Link>
+            <Link
+              to={"movies"}
+              className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
+            >
+              Movies
+            </Link>
+            {/* <Link
+              to={"new"}
+              className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
+            >
+              New & popular
+            </Link>
+            <Link
+              to={"my-list"}
+              className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
+            >
+              My List
+            </Link>
+            <Link
+              to={"language"}
+              className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
+            >
               Browse by Language
-            </p>
+            </Link> */}
           </>
         )}
       </div>
