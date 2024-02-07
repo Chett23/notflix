@@ -1,37 +1,43 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
+import { apiOptions } from "../Constants/data";
+
 import { StarIcon } from "@heroicons/react/24/solid";
 
-function MediaCard({ media, options, media_type }) {
+function MediaCard({ media, media_type }) {
   const [watchProvidersResults, setwatchProvidersResults] = useState({});
 
-  const getProviders = async (media_type, media_id, raceFlag) => {
+  const getProviders = async (media_type, media_id, signal) => {
     await fetch(
       `https://api.themoviedb.org/3/${media_type}/${media_id}/watch/providers`,
-      options,
+      { ...apiOptions, signal },
     )
       .then((response) => response.json())
       .then((response) => {
         let usResults = response.results?.US;
-        !raceFlag &&
-          setwatchProvidersResults({
-            free: usResults?.free || [],
-            ...usResults,
-          });
+        setwatchProvidersResults({
+          free: usResults?.free || [],
+          ...usResults,
+        });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        if (err.message !== "The user aborted a request.") {
+          console.error(err.message);
+        }
+      });
   };
 
   useEffect(() => {
-    let raceFlag = false;
+    const controller = new AbortController();
 
-    getProviders(media_type, media.id);
+    
+    media_type && getProviders(media_type, media.id, controller.signal);
 
     return () => {
-      raceFlag = true;
+      controller.abort();
     };
-  }, []);
+  }, [media, media_type]);
   return (
     <div className="group relative mx-auto min-w-48 rounded-md" key={media.id}>
       <img
@@ -50,11 +56,9 @@ function MediaCard({ media, options, media_type }) {
         <div className="scrollbar-hide max-h-40 overflow-x-scroll">
           {watchProvidersResults &&
             Object.keys(watchProvidersResults).map((paymentMethod) => {
-              if (
-                paymentMethod != "link" &&
-                watchProvidersResults[paymentMethod].length > 0
-              ) {
-                return (
+              return (
+                paymentMethod !== "link" &&
+                watchProvidersResults[paymentMethod].length > 0 && (
                   <div
                     key={`${media.id} - ${paymentMethod}`}
                     className="flex flex-col"
@@ -75,8 +79,8 @@ function MediaCard({ media, options, media_type }) {
                       ))}
                     </div>
                   </div>
-                );
-              }
+                )
+              );
             })}
         </div>
         <div className="flex flex-col">
