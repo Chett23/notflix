@@ -12,6 +12,7 @@ import {
 
 import { useScrollPosition } from "../utils/useScrollPosition";
 import { useWindowDimensions } from "../utils/useWindowDimensions";
+import SearchBar from "./SearchBar";
 
 export const Navbar = () => {
   const scrollPosition = useScrollPosition();
@@ -24,7 +25,12 @@ export const Navbar = () => {
       } transition duration-300`}
     >
       <div className={"flex flex-row items-center space-x-6 p-4"}>
-        <img src={netflix_logo} className={"w-24"} alt="netflix logo" />
+        <Link
+          to={"/"}
+          className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
+        >
+          <img src={netflix_logo} className={"w-24"} alt="netflix logo" />
+        </Link>
         {width <= 900 ? (
           <>
             <Bars3Icon className="text-font-50" />
@@ -49,29 +55,12 @@ export const Navbar = () => {
             >
               Movies
             </Link>
-            {/* <Link
-              to={"new"}
-              className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
-            >
-              New & popular
-            </Link>
-            <Link
-              to={"my-list"}
-              className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
-            >
-              My List
-            </Link>
-            <Link
-              to={"language"}
-              className="cursor-pointer text-xs text-font-50 hover:text-accent-500 md:text-sm"
-            >
-              Browse by Language
-            </Link> */}
           </>
         )}
       </div>
       <div className={"flex flex-row items-center space-x-4 p-4"}>
         <MagnifyingGlassIcon className="h-6 w-6 text-font-50" />
+        {/* <SearchBar /> */}
         <p className="text-sm text-font-50 ">Kids</p>
         <BellIcon className={"h-6 w-6 text-font-50"} />
         <UserIcon className="h-6 w-6 text-font-50" />
