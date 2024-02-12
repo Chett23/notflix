@@ -31,7 +31,7 @@ export const HeroMedia = ({ baseMedia }) => {
   useEffect(() => {
     const controller = new AbortController();
 
-    getMediaDetails(apiOptions, controller.signal);
+    baseMedia.videos || getMediaDetails(apiOptions, controller.signal);
 
     return () => {
       controller.abort();

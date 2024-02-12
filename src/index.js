@@ -6,9 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
-import { Home } from "./pages/Home";
-import { Movies } from "./pages/Movies";
-import { TVShows } from "./pages/TVShows";
+import { Home, homeLoader } from "./pages/Home";
+import { Movies, moviesLoader } from "./pages/Movies";
+import { TVShows, showsLoader } from "./pages/TVShows";
 import { MediaPage } from "./pages/MediaPage";
 
 const router = createBrowserRouter([
@@ -19,19 +19,22 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        loader: homeLoader
       },
       {
         path: "/movies",
         element: <Movies />,
+        loader: moviesLoader
       },
       {
         path: "/shows",
         element: <TVShows />,
+        loader: showsLoader
       },
       {
         path: "/media/:media_id",
         element: <MediaPage />,
-      }
+      },
     ],
   },
 ]);
