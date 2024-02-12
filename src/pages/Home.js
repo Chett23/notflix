@@ -42,7 +42,7 @@ export const Home = () => {
           baseMedia={movies[Math.floor(Math.random() * movies.length)]}
         />
       )}
-      <MediaCarosel mediaArray={movies} header="Popular Mmovies" />
+      <MediaCarosel mediaArray={movies} header="Popular Movies" />
       <MediaCarosel mediaArray={shows} header={"Popular TV Shows"} />
       <MediaCarosel mediaArray={topMovies} header={"Top Movies"} />
       <MediaCarosel mediaArray={topShows} header={"Top TV Shows"} />
