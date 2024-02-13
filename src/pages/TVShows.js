@@ -5,62 +5,25 @@ import { apiOptions } from "../Constants/data";
 
 import MediaCarosel from "../components/MediaCarosel";
 import { HeroMedia } from "../components/HeroMedia";
+import { useLoaderData } from "react-router-dom";
+import { getShows, getTopShows, getDiscoverShows } from "../utils/loaderFunctions";
+
+//
+// Loader
+//
+export async function showsLoader() {
+  const shows = await getShows(apiOptions);
+  const topShows = await getTopShows(apiOptions);
+  const discoverShows = await getDiscoverShows(apiOptions);
+
+  return { shows, topShows,discoverShows };
+}
 
 export const TVShows = () => {
-  const [shows, setShows] = useState([]);
-  const [topShows, setTopShows] = useState([]);
-  const [discoverShows, setDiscoverShows] = useState([]);
-
-  const getShows = async (options, signal) =>
-    await fetch(
-      "https://api.themoviedb.org/3/trending/tv/week?language=en-US&page=1",
-      {...options,signal},
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setShows(response.results);
-      })
-      .catch((err) => {
-        if (err.message !== "The user aborted a request.") {
-          console.error(err.message);
-        }
-      });
-  const getTopShows = async (options, signal) =>
-    await fetch(
-      "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
-      {...options,signal},
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setTopShows(response.results);
-      })
-      .catch((err) => {
-        if (err.message !== "The user aborted a request.") {
-          console.error(err.message);
-        }
-      });
-
-  const getDiscoverMovies = async (options, signal) =>
-    await fetch(
-      "https://api.themoviedb.org/3/discover/tv?language=en-US&page=1",
-      { ...options, signal },
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setDiscoverShows(response.results);
-      })
-      .catch((err) => {
-        if (err.message !== "The user aborted a request.") {
-          console.error(err.message);
-        }
-      });
+  const { shows, topShows, discoverShows } = useLoaderData();
 
   useEffect(() => {
     const controller = new AbortController();
-
-    getShows(apiOptions, controller.signal);
-    getTopShows(apiOptions, controller.signal);
-    getDiscoverMovies(apiOptions, controller.signal);
 
     return () => {
       controller.abort();
