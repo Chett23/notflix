@@ -6,7 +6,7 @@ import { apiOptions } from "../Constants/data";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
-function MediaCard({ media, media_type }) {
+function MediaCard({ media, media_type, link_path }) {
   const [watchProvidersResults, setwatchProvidersResults] = useState({});
 
   const getProviders = async (media_type, media_id, signal) => {
@@ -39,7 +39,7 @@ function MediaCard({ media, media_type }) {
     };
   }, [media, media_type]);
   return (
-    <Link to={`${media_type}/${media.id}`}>
+    <Link to={link_path}>
       <div
         className="group relative mx-auto min-w-48 rounded-md"
         key={media.id}

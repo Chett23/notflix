@@ -16,22 +16,6 @@ export const getMovies = async (options) => {
   return response.results;
 };
 
-export const getMediaDetails = async (options, media_type, media_id) => {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/${media_type}/${media_id}?append_to_response=videos&language=en-US`,
-    {
-      ...options,
-    },
-  )
-    .then((response) => response.json())
-    .catch((err) => {
-      if (err.message !== "The user aborted a request.") {
-        console.error(err.message);
-      }
-    });
-  return response;
-};
-
 export const getTopMovies = async (options) => {
   const response = await fetch(
     "https://api.themoviedb.org/3/movie/top_rated?append_to_response=video&language=en-US&page=1",
@@ -43,7 +27,6 @@ export const getTopMovies = async (options) => {
         console.error(err.message);
       }
     });
-    console.log(response.results);
   return response.results;
 };
 
@@ -105,4 +88,24 @@ export const getDiscoverShows = async (options) => {
       }
     });
   return response.results;
+};
+
+//
+// Media Specific Loaders
+//
+
+export const getMediaDetails = async (options, media_type, media_id) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/${media_type}/${media_id}?append_to_response=videos,credits,similar,reviews,images,recommendations&language=en-US`,
+    {
+      ...options,
+    },
+  )
+    .then((response) => response.json())
+    .catch((err) => {
+      if (err.message !== "The user aborted a request.") {
+        console.error(err.message);
+      }
+    });
+  return response;
 };

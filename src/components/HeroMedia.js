@@ -7,7 +7,7 @@ import { getMediaDetails } from "../utils/loaderFunctions";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
-export const HeroMedia = ({ baseMedia }) => {
+export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
   const [heroMedia, setHeroMedia] = useState(baseMedia);
 
   const getMediaDetails = async (options, signal) =>
@@ -31,7 +31,7 @@ export const HeroMedia = ({ baseMedia }) => {
   useEffect(() => {
     const controller = new AbortController();
 
-    baseMedia.media_type && getMediaDetails(apiOptions,controller.signal)
+    baseMedia.media_type && getMediaDetails(apiOptions, controller.signal);
 
     return () => {
       controller.abort();
@@ -59,10 +59,16 @@ export const HeroMedia = ({ baseMedia }) => {
               {heroMedia?.overview}
             </p>
             <div className="flex flex-row gap-4">
-              <button className="text-accent-900-50 h-12 w-36 rounded-md bg-accent-300 font-extrabold">
-                Play
-              </button>
-              <Link to={`${baseMedia.media_type}/${heroMedia?.id}`}>
+              {/* TODO: make the play button start a yourube iframe popup of the main trailer instead of auto play */}
+              <a
+                href={`https://www.imdb.com/title/${heroMedia.imdb_id}`}
+                target={heroMedia.imdb_id && "_blank"}
+              >
+                <button className="text-accent-900-50 h-12 w-36 rounded-md bg-accent-300 font-extrabold">
+                  Play
+                </button>
+              </a>
+              <Link to={`${path_prefix}${heroMedia.id}`}>
                 <button className="text-accent-900-50 flex h-12 w-36 items-center justify-evenly rounded-md bg-accent-100 font-extrabold opacity-50">
                   <InformationCircleIcon className="w-8" />
                   More Info

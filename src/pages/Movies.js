@@ -10,7 +10,6 @@ import {
   getDiscoverMovies,
   getMovies,
   getTopMovies,
-  getTrendingMovies,
 } from "../utils/loaderFunctions";
 
 export async function moviesLoader() {
