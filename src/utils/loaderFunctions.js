@@ -107,5 +107,28 @@ export const getMediaDetails = async (options, media_type, media_id) => {
         console.error(err.message);
       }
     });
-  return response;
+
+  return { ...response, media_type };
+};
+
+//
+// People Loaders
+//
+
+export const getPersonDetails = async (options, person_id) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/person/${person_id}?append_to_response=combined_credits,latest,external_ids&language=en-US`,
+    {
+      ...options,
+    },
+  )
+    .then((response) => response.json())
+    .catch((err) => {
+      if (err.message !== "The user aborted a request.") {
+        console.error(err.message);
+      }
+    });
+  console.log(response);
+
+  return { ...response };
 };

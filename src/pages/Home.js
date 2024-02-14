@@ -43,26 +43,10 @@ export const Home = () => {
           path_prefix={`/movies/`}
         />
       )}
-      <MediaCarosel
-        mediaArray={movies}
-        header={"Popular Movies"}
-        path_prefix={`/movies/`}
-      />
-      <MediaCarosel
-        mediaArray={shows}
-        header={"Popular TV Shows"}
-        path_prefix={`/shows/`}
-      />
-      <MediaCarosel
-        mediaArray={topMovies}
-        header={"Top Movies"}
-        path_prefix={`/movies/`}
-      />
-      <MediaCarosel
-        mediaArray={topShows}
-        header={"Top TV Shows"}
-        path_prefix={`/shows/`}
-      />
+      <MediaCarosel mediaArray={movies} header={"Popular Movies"} />
+      <MediaCarosel mediaArray={shows} header={"Popular TV Shows"} />
+      <MediaCarosel mediaArray={topMovies} header={"Top Movies"} />
+      <MediaCarosel mediaArray={topShows} header={"Top TV Shows"} />
     </div>
   );
 };

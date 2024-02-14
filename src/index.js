@@ -10,6 +10,7 @@ import { Home, homeLoader } from "./pages/Home";
 import { Movies, moviesLoader } from "./pages/Movies";
 import { TVShows, showsLoader } from "./pages/TVShows";
 import { MediaPage, mediaPageLoader } from "./pages/MediaPage";
+import PeoplePage, { PeopleLoader } from "./pages/PeoplePage";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,12 @@ const router = createBrowserRouter([
       {
         path: "/:media_type/:media_id",
         element: <MediaPage />,
-        loader: mediaPageLoader
+        loader: mediaPageLoader,
+      },
+      {
+        path: "/people/:person_id",
+        element: <PeoplePage />,
+        loader: PeopleLoader,
       },
     ],
   },
