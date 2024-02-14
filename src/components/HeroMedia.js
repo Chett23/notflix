@@ -36,16 +36,16 @@ export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
     return () => {
       controller.abort();
     };
-  });
+  },[heroMedia]);
 
   return (
     Object.keys(heroMedia).length > 0 && (
-      <div className="relative mx-auto max-h-[calc(100vh/7*5)] overflow-y-hidden">
+      <div className="relative mx-auto max-h-[calc(100vh/7*5)] min-h-72 overflow-y-hidden">
         <img
           alt={heroMedia.id}
           src={
             heroMedia &&
-            `https://image.tmdb.org/t/p/w1280/${heroMedia?.backdrop_path}`
+            `https://image.tmdb.org/t/p/w1280/${heroMedia?.backdrop_path || heroMedia?.poster_path}`
           }
           className="max-h-screen w-full self-center rounded-md"
         />
@@ -68,7 +68,7 @@ export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
                   Play
                 </button>
               </a>
-              <Link to={`${path_prefix}${heroMedia.id}`}>
+              <Link to={`${path_prefix}${heroMedia.id}`} preventScrollReset={false}>
                 <button className="text-accent-900-50 flex h-12 w-36 items-center justify-evenly rounded-md bg-accent-100 font-extrabold opacity-50">
                   <InformationCircleIcon className="w-8" />
                   More Info
