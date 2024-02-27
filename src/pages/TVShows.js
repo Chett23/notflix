@@ -37,9 +37,9 @@ export const TVShows = () => {
           baseMedia={shows[Math.floor(Math.random() * shows.length)]}
         />
       )}
-      <MediaCarosel mediaArray={shows} header={"Popular"} />
-      <MediaCarosel mediaArray={topShows} header={"Top Shows"} />
-      <MediaCarosel mediaArray={discoverShows} header={"Discover Shows"} />
+      <MediaCarosel mediaArray={shows} header={"Popular"} path_prefix="../"/>
+      <MediaCarosel mediaArray={topShows} header={"Top Shows"} path_prefix="../"/>
+      <MediaCarosel mediaArray={discoverShows} header={"Discover Shows"} path_prefix="../"/>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Notflix",
+  "name": "Netflix styled application designed to discover new movies and shows",
   "icons": [
     {
       "src": "favicon.ico",

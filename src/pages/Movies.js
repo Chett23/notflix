@@ -46,9 +46,13 @@ export const Movies = () => {
           baseMedia={movies[Math.floor(Math.random() * movies.length)]}
         />
       )}
-      <MediaCarosel mediaArray={movies} header={"Popular"} />
-      <MediaCarosel mediaArray={top} header={"Top Rated"} />
-      <MediaCarosel mediaArray={discover} header={"Discover"} />
+      <MediaCarosel mediaArray={movies} header={"Popular"} path_prefix="../" />
+      <MediaCarosel mediaArray={top} header={"Top Rated"} path_prefix="../" />
+      <MediaCarosel
+        mediaArray={discover}
+        header={"Discover"}
+        path_prefix="../"
+      />
     </div>
   );
 };
