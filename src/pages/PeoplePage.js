@@ -1,7 +1,11 @@
 import React from "react";
+
+import { useLoaderData } from "react-router-dom";
+
+import PersonHighlight from "../components/PersonHighlight";
 import { apiOptions } from "../Constants/data";
 import { getPersonDetails } from "../utils/loaderFunctions";
-import { useLoaderData } from "react-router-dom";
+import KnownFor from "../components/KnownFor";
 
 export async function PeopleLoader({ params }) {
   const person = await getPersonDetails(apiOptions, params.person_id);
@@ -11,7 +15,14 @@ export async function PeopleLoader({ params }) {
 
 const PeoplePage = () => {
   const { person } = useLoaderData();
-  return <div className="pt-24 text-font-50">{person.name}</div>;
+  console.log(person);
+
+  return (
+    <>
+      <PersonHighlight person={person} />
+      <KnownFor person={person} />
+    </>
+  );
 };
 
 export default PeoplePage;

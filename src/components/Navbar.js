@@ -31,7 +31,7 @@ export const Navbar = () => {
         >
           <img src={netflix_logo} className={"w-24"} alt="netflix logo" />
         </Link>
-        {width <= 900 ? (
+        {width <= 768 ? (
           <>
             <Bars3Icon className="text-font-50" />
           </>
@@ -61,7 +61,7 @@ export const Navbar = () => {
       <div className={"flex flex-row items-center space-x-4 p-4"}>
         <MagnifyingGlassIcon className="h-6 w-6 text-font-50" />
         {/* <SearchBar /> */}
-        {/* <p className="text-sm text-font-50 ">Kids</p> */}
+        <p className="text-sm text-font-50 ">Profile</p>
         <BellIcon className={"h-6 w-6 text-font-50"} />
         <UserIcon className="h-6 w-6 text-font-50" />
       </div>

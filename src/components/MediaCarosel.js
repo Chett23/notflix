@@ -10,7 +10,7 @@ const MediaCarosel = ({ mediaArray, header, path_prefix = "" }) => {
 
   return (
     <div className="flex flex-col items-start gap-4 p-6">
-      <p className="text-xl font-bold text-font-50">{header}</p>
+      <p className="text-xl font-bold text-font-100">{header}</p>
       <div className="scrollbar-hide flex max-w-full gap-6 overflow-y-hidden overflow-x-scroll">
         {mediaArray &&
           mediaArray?.map((media) => (

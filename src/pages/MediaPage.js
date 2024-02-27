@@ -2,13 +2,14 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import { HeroMedia } from "../components/HeroMedia";
-import { getMediaDetails } from "../utils/loaderFunctions";
+import { getMediaDetails, getProviders } from "../utils/loaderFunctions";
 import { apiOptions } from "../Constants/data";
 import { useLoaderData } from "react-router-dom";
 import MediaCarosel from "../components/MediaCarosel";
 import CastCarosel from "../components/CastCarosel";
 import VideoCarosel from "../components/VideoCarosel";
-
+import MediaHighlight from "../components/MediaHighlight";
+import ReviewCarosel from "../components/ReviewCarosel";
 
 export async function mediaPageLoader({ params }) {
   const media_type =
@@ -18,21 +19,22 @@ export async function mediaPageLoader({ params }) {
         ? "tv"
         : params.media_type;
   const media = await getMediaDetails(apiOptions, media_type, params.media_id);
-  return { media };
+  const providers = await getProviders(apiOptions, media_type, params.media_id);
+  return { media, providers };
 }
 
 // TODO: hero media isnt changing when clicking on a media from the carousel while on mediapage. Id and url are accuratly changing.
 
 export const MediaPage = () => {
-  const { media } = useLoaderData();
-  useEffect(() => {}, [media]);
+  const { media, providers } = useLoaderData();
 
   return (
     <div>
       {media?.id ? (
         <>
-          <HeroMedia
-            baseMedia={media}
+          <MediaHighlight
+            media={media}
+            providers={providers}
             path_prefix={`../${media.media_type}/`}
           />
           {media?.credits?.cast.length > 0 && (
@@ -55,7 +57,12 @@ export const MediaPage = () => {
               path_prefix={`../${media.media_type}`}
             />
           )}
-          <div>Watch providers</div>
+          {media?.reviews?.results.length > 0 && (
+            <ReviewCarosel
+              reviewsArray={media.reviews.results}
+              header={"Reviews"}
+            />
+          )}{" "}
         </>
       ) : (
         <div className="pt-24 text-xl font-bold text-font-50">

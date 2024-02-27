@@ -27,7 +27,10 @@ export const getTopMovies = async (options) => {
         console.error(err.message);
       }
     });
-  return response.results;
+  return response.results.map((responseItem) => ({
+    ...responseItem,
+    media_type: "movie",
+  }));
 };
 
 export const getDiscoverMovies = async (options, signal) => {
@@ -64,7 +67,7 @@ export const getShows = async (options) => {
 
 export const getTopShows = async (options) => {
   const response = await fetch(
-    "https://api.themoviedb.org/3/tv/top_rated?append_to_response=video&language=en-US&page=1",
+    "https://api.themoviedb.org/3/tv/top_rated?append_to_response=videos&language=en-US&page=1",
     { ...options },
   )
     .then((response) => response.json())
@@ -73,7 +76,10 @@ export const getTopShows = async (options) => {
         console.error(err.message);
       }
     });
-  return response.results;
+  return response.results.map((responseItem) => ({
+    ...responseItem,
+    media_type: "tv",
+  }));
 };
 
 export const getDiscoverShows = async (options) => {
@@ -96,7 +102,7 @@ export const getDiscoverShows = async (options) => {
 
 export const getMediaDetails = async (options, media_type, media_id) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/${media_type}/${media_id}?append_to_response=videos,credits,similar,reviews,images,recommendations&language=en-US`,
+    `https://api.themoviedb.org/3/${media_type}/${media_id}?append_to_response=videos,credits,external_ids,account_states,,similar,reviews,images,recommendations,reviews&language=en-US`,
     {
       ...options,
     },
@@ -109,6 +115,23 @@ export const getMediaDetails = async (options, media_type, media_id) => {
     });
 
   return { ...response, media_type };
+};
+
+export const getProviders = async (options, media_type, media_id) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/${media_type}/${media_id}/watch/providers`,
+    { ...options },
+  )
+    .then((response) => response.json())
+    .catch((err) => {
+      if (err.message !== "The user aborted a request.") {
+        console.error(err.message);
+      }
+    });
+  return {
+    free: response.results?.US?.free || [],
+    ...response.results?.US,
+  };
 };
 
 //
@@ -128,7 +151,5 @@ export const getPersonDetails = async (options, person_id) => {
         console.error(err.message);
       }
     });
-  console.log(response);
-
-  return { ...response };
+  return response;
 };

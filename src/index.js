@@ -11,11 +11,13 @@ import { Movies, moviesLoader } from "./pages/Movies";
 import { TVShows, showsLoader } from "./pages/TVShows";
 import { MediaPage, mediaPageLoader } from "./pages/MediaPage";
 import PeoplePage, { PeopleLoader } from "./pages/PeoplePage";
+import Error from "./pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
