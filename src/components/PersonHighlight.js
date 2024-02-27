@@ -13,9 +13,9 @@ const PersonHighlight = ({ person }) => {
         alt={person.id}
         src={
           person &&
-          `https://image.tmdb.org/t/p/w1280/${person?.combined_credits?.cast[0].backdrop_path}`
+          `https://image.tmdb.org/t/p/w1280/${person?.combined_credits?.cast[0].backdrop_path || person?.combined_credits?.cast[0].poster_path}`
         }
-        className="max-h-screen w-full self-center rounded-md opacity-30"
+        className="max-h-screen min-h-72 w-full self-center rounded-md opacity-30"
       />
       <div className="absolute inset-0 max-h-screen rounded-md bg-gradient-to-tr from-accent-900 opacity-65"></div>
       <div className="absolute inset-0 m-auto flex max-h-96 w-full max-w-4xl flex-row items-center justify-center gap-4 p-10 lg:w-[calc(85vw)]">
@@ -33,7 +33,7 @@ const PersonHighlight = ({ person }) => {
               alt="imdb page"
               target="_blank"
             >
-              <span className="text-lg font-extrabold lg:text-2xl">
+              <span className="text-lg font-extrabold lg:text-2xl hover:text-accent-500">
                 {person.name}{" "}
               </span>
             </a>

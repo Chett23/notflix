@@ -20,7 +20,7 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`z-10 flex w-full flex-row justify-between bg-gradient-to-b from-background-950 md:fixed ${
+      className={`z-20 flex w-full flex-row justify-between bg-gradient-to-b from-background-950 md:fixed ${
         scrollPosition > 42 && " bg-background-950"
       } transition duration-300`}
     >

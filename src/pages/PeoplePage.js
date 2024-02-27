@@ -6,6 +6,7 @@ import PersonHighlight from "../components/PersonHighlight";
 import { apiOptions } from "../Constants/data";
 import { getPersonDetails } from "../utils/loaderFunctions";
 import KnownFor from "../components/KnownFor";
+import CreditCard from "../components/CreditCard";
 
 export async function PeopleLoader({ params }) {
   const person = await getPersonDetails(apiOptions, params.person_id);
@@ -15,7 +16,6 @@ export async function PeopleLoader({ params }) {
 
 const PeoplePage = () => {
   const { person } = useLoaderData();
-  console.log(person);
 
   return (
     <>

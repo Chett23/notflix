@@ -6,13 +6,12 @@ const KnownFor = ({ person }) => {
     (a, b) => b.vote_average - a.vote_average,
   );
 
-
   return (
-    <div className="mx-auto flex h-full w-full flex-col items-start p-4 xl:w-3/5">
+    <div className="mx-auto flex h-72 w-full flex-col items-start p-4">
       <span className="max-h-56 pb-2 text-lg font-bold text-font-100 xl:text-xl">
         Known For:
       </span>
-      <div className="flex flex-wrap items-center justify-center gap-4">
+      <div className="scrollbar-hide flex max-w-full gap-4 overflow-x-scroll">
         {sorted.slice(0, 12).map((credit) => (
           <CreditCard credit={credit} key={credit.credit_id} />
         ))}

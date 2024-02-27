@@ -2,11 +2,18 @@ import React from "react";
 import YouTube from "react-youtube";
 
 const VideoCarosel = ({ videoArray, header }) => {
+  const sortedVideos = videoArray.sort((a, b) =>
+    ((a.type === "Trailer") === b.type) === "Trailer"
+      ? 0
+      : a.type === "Trailer"
+        ? -1
+        : 1,
+  );
   return (
     <div className="flex w-full flex-col items-start">
       <span className="px-6 text-xl font-bold text-font-100">{header}</span>
       <div className=" scrollbar-hide flex w-full flex-row gap-4 overflow-x-scroll p-6 ">
-        {videoArray.map((video, index) => (
+        {sortedVideos.map((video, index) => (
           <a
             href={
               video.site === "YouTube" &&
