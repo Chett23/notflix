@@ -10,6 +10,7 @@ import { Home, homeLoader } from "./pages/Home";
 import { Movies, moviesLoader } from "./pages/Movies";
 import { TVShows, showsLoader } from "./pages/TVShows";
 import { MediaPage, mediaPageLoader } from "./pages/MediaPage";
+import { SeasonPage, seasonPageLoader } from "./pages/SeasonPage";
 import PeoplePage, { PeopleLoader } from "./pages/PeoplePage";
 import Error from "./pages/Error";
 
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
         path: "/:media_type/:media_id",
         element: <MediaPage />,
         loader: mediaPageLoader,
+      },
+      {
+        path: "/:media_type/:media_id/seasons/:season_number",
+        element: <SeasonPage />,
+        loader: seasonPageLoader,
       },
       {
         path: "/people/:person_id",

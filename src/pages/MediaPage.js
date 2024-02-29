@@ -1,13 +1,12 @@
 import React from "react";
-import { useEffect, useState } from "react";
 
-import { HeroMedia } from "../components/HeroMedia";
 import { getMediaDetails, getProviders } from "../utils/loaderFunctions";
 import { apiOptions } from "../Constants/data";
 import { useLoaderData } from "react-router-dom";
 import MediaCarosel from "../components/MediaCarosel";
 import CastCarosel from "../components/CastCarosel";
 import VideoCarosel from "../components/VideoCarosel";
+import SeasonCarosel from "../components/SeasonCarosel";
 import MediaHighlight from "../components/MediaHighlight";
 import ReviewCarosel from "../components/ReviewCarosel";
 
@@ -40,6 +39,9 @@ export const MediaPage = () => {
           {media?.credits?.cast.length > 0 && (
             <CastCarosel castArray={media.credits.cast} />
           )}
+          {media?.seasons && (
+            <SeasonCarosel seasons={media.seasons} header={"Seasons"} />
+          )}
           {media?.videos?.results.length > 0 && (
             <VideoCarosel videoArray={media.videos.results} header={"Clips"} />
           )}
@@ -62,7 +64,7 @@ export const MediaPage = () => {
               reviewsArray={media.reviews.results}
               header={"Reviews"}
             />
-          )}{" "}
+          )}
         </>
       ) : (
         <div className="pt-24 text-xl font-bold text-font-50">

@@ -4,7 +4,7 @@ import formatDate from "../utils/formatDate";
 
 const MediaSnippet = ({ media }) => {
   const formattedDate = formatDate(
-    media?.release_date || media?.first_air_date,
+    media?.release_date || media?.first_air_date || media?.air_date,
   );
   const directors = media.credits.crew.filter((crew) =>
     crew.job.includes("Director"),
@@ -17,7 +17,7 @@ const MediaSnippet = ({ media }) => {
       <span className="space-x-2 text-xs font-light text-font-50 lg:text-base">
         <span className="m-0">{formattedDate}</span>
         <b>·</b>
-        {media.genres.map((genre, index) => (
+        {media?.genres?.map((genre, index) => (
           <Link
             to={`../../genres/${genre.name}`}
             className=" m-0 hover:underline"
@@ -37,9 +37,9 @@ const MediaSnippet = ({ media }) => {
         {media.overview}
       </span>
 
-      <div className="flex min-w-full justify-between py-2">
+      <div className="flex min-w-full justify-between py-2 gap-2">
         {directors.length > 0 && (
-          <div className="flex flex-col flex-wrap items-start">
+          <div className="flex flex-col flex-wrap items-start overflow-hidden hover:z-10 hover:overflow-visible [&:hover~*]:opacity-0">
             <span className="flex-1 font-bold text-font-100">
               {directors.length > 1 ? "Directors" : "Director"}
             </span>
@@ -53,7 +53,7 @@ const MediaSnippet = ({ media }) => {
           </div>
         )}
         {producers.length > 0 && (
-          <div className="flex flex-col flex-wrap items-start">
+          <div className="flex flex-col flex-wrap items-start overflow-hidden hover:z-10 hover:overflow-visible">
             <span className="flex-1 font-bold text-font-100">
               {producers.length > 1 ? "Producers" : "Producer"}
             </span>
