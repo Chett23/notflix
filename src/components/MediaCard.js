@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 
 import { apiOptions } from "../Constants/data";
 
-import { StarIcon } from "@heroicons/react/24/solid";
+import { FaStar } from "react-icons/fa6";
+
 import { Link } from "react-router-dom";
 
 function MediaCard({ media, media_type, link_path }) {
@@ -92,7 +93,7 @@ function MediaCard({ media, media_type, link_path }) {
           <div className="flex flex-col">
             <p className="text-base text-font-50">Rating:</p>
             <div className="flex w-full flex-row items-center justify-start gap-4">
-              <StarIcon className="h-8 w-8 text-yellow-500" />
+              <FaStar className="size-8 text-yellow-500" />
               <div className="flex flex-col gap-0">
                 <p className="space-y-0 text-base text-font-50">
                   <strong>{Math.round(media.vote_average * 10) / 10}</strong> /

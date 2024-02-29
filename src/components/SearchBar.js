@@ -1,6 +1,7 @@
 import React from "react";
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { HiSearch } from "react-icons/hi";
+
 
 const SearchBar = () => {
   return (
@@ -12,7 +13,7 @@ const SearchBar = () => {
         placeholder="Search"
       />
       <button type="submit" class="absolute right-0 top-0 mr-4 mt-4">
-        <MagnifyingGlassIcon className="h-6 w-6 text-font-50" />
+        <HiSearch className="h-6 w-6 text-font-50" />
       </button>
     </div>
   );

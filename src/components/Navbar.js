@@ -3,12 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import netflix_logo from "../images/netflix_assets/Netflix_Logo_RGB.png";
-import { UserIcon } from "@heroicons/react/24/solid";
-import {
-  MagnifyingGlassIcon,
-  BellIcon,
-  Bars3Icon,
-} from "@heroicons/react/24/outline";
+
+import { HiUser } from "react-icons/hi2";
+import { HiSearch, HiOutlineBell, HiOutlineMenu } from "react-icons/hi";
 
 import { useScrollPosition } from "../utils/useScrollPosition";
 import { useWindowDimensions } from "../utils/useWindowDimensions";
@@ -33,7 +30,7 @@ export const Navbar = () => {
         </Link>
         {width <= 768 ? (
           <>
-            <Bars3Icon className="text-font-50" />
+            <HiOutlineMenu className="text-font-50" />
           </>
         ) : (
           <>
@@ -59,11 +56,11 @@ export const Navbar = () => {
         )}
       </div>
       <div className={"flex flex-row items-center space-x-4 p-4"}>
-        <MagnifyingGlassIcon className="h-6 w-6 text-font-50" />
+        <HiSearch className="h-6 w-6 text-font-50" />
         {/* <SearchBar /> */}
         <p className="text-sm text-font-50 ">Profile</p>
-        <BellIcon className={"h-6 w-6 text-font-50"} />
-        <UserIcon className="h-6 w-6 text-font-50" />
+        <HiOutlineBell className={"h-6 w-6 text-font-50"} />
+        <HiUser className="h-6 w-6 text-font-50" />
       </div>
     </header>
   );

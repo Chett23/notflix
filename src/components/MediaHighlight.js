@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import ProviderSnippet from "./ProviderSnippet";
 import MediaSnippet from "./MediaSnippet";
 
-const MediaHighlight = ({ media, providers, path_prefix }) => {
-  const [showProviders, setShowProviders] = useState(false);
+const MediaHighlight = ({ media, providers }) => {
+  const [showProviders, setShowProviders] = useState(true);
 
   return (
     <div className="max-w-screen relative mx-auto max-h-[calc(100vh/7*5)] min-h-72 overflow-y-hidden">
@@ -26,28 +26,40 @@ const MediaHighlight = ({ media, providers, path_prefix }) => {
           />
         </div>
         <div className="flex h-full w-2/3 flex-col items-start justify-center lg:justify-start">
-          <span className="text-font-100">
-            <a
-              className={
-                media.homepage ? "hover:text-accent-500" : "pointer-events-none"
-              }
-              href={media.homepage || ""}
-              alt={`${media.title || media.name} IMDB Page`}
-              target={media.homepage && "_blank"}
-            >
-              <span className="text-lg font-extrabold lg:text-2xl">
-                {media.title || media.name}{" "}
+          <div className="flex w-full justify-between">
+            <span className="w-full text-left text-font-100">
+              <a
+                className={
+                  media.homepage
+                    ? "hover:text-accent-500"
+                    : "pointer-events-none"
+                }
+                href={media.homepage || ""}
+                alt={`${media.title || media.name} IMDB Page`}
+                target={media.homepage && "_blank"}
+              >
+                <span className="text-lg font-extrabold lg:text-2xl">
+                  {media.title || media.name}{" "}
+                </span>
+              </a>
+              <span className="font-extrathin lg:text-xl">
+                (
+                {media?.release_date?.split("-")[0] ||
+                  (media.first_air_date &&
+                    `${media?.first_air_date?.split("-")[0]} - ${media?.last_air_date?.split("-")[0]}`) ||
+                  media?.air_date.split("-")[0]}
+                )
               </span>
-            </a>
-            <span className="font-extrathin lg:text-xl">
-              (
-              {media?.release_date?.split("-")[0] ||
-                media?.first_air_date?.split("-")[0]}
-              )
             </span>
-          </span>
+            <span
+              className=" m-auto cursor-pointer rounded-md bg-background-900 p-1 text-xs text-font-100 hover:text-accent-500"
+              onClick={() => setShowProviders((prev) => !prev)}
+            >
+              {showProviders ? "Details" : "Where To watch?"}
+            </span>
+          </div>
           {showProviders ? (
-            <ProviderSnippet providers={providers} />
+            <ProviderSnippet providers={providers} media={media} />
           ) : (
             <MediaSnippet media={media} />
           )}

@@ -31,6 +31,8 @@ export const Movies = () => {
     );
   };
 
+  console.log(top)
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -51,7 +53,7 @@ export const Movies = () => {
       <MediaCarosel
         mediaArray={discover}
         header={"Discover"}
-        path_prefix="../"
+        path_prefix="/movies"
       />
     </div>
   );

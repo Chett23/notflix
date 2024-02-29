@@ -1,6 +1,7 @@
 import React from "react";
 
-import { StarIcon } from "@heroicons/react/24/solid";
+import { FaStar } from "react-icons/fa6";
+
 import { Link } from "react-router-dom";
 
 const CreditCard = ({ credit }) => {
@@ -23,7 +24,7 @@ const CreditCard = ({ credit }) => {
           </span>
           <div className="flex gap-3">
             <div className="flex items-center gap-1">
-              <StarIcon className=" h-3 w-3 fill-yellow-600" />
+              <FaStar className=" h-3 w-3 fill-yellow-600" />
               <span className="text-xs text-font-50">
                 {Number(credit.vote_average.toFixed(1))}
               </span>

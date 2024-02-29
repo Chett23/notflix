@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import { apiOptions } from "../Constants/data";
 import { getMediaDetails } from "../utils/loaderFunctions";
 
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { HiOutlineInformationCircle } from "react-icons/hi";
+
 import { Link } from "react-router-dom";
+import YouTubeModal from "./YouTubeModal";
 
 export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
   const [heroMedia, setHeroMedia] = useState(baseMedia);
+  const [open, setOpen] = useState(false);
 
   const getMediaDetails = async (options, signal) =>
     await fetch(
@@ -36,7 +39,7 @@ export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
     return () => {
       controller.abort();
     };
-  },[heroMedia]);
+  }, []);
 
   return (
     Object.keys(heroMedia).length > 0 && (
@@ -60,17 +63,37 @@ export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
             </p>
             <div className="flex flex-row gap-4">
               {/* TODO: make the play button start a yourube iframe popup of the main trailer instead of auto play */}
-              <a
-                href={`https://www.imdb.com/title/${heroMedia.imdb_id}`}
-                target={heroMedia.imdb_id && "_blank"}
+              {heroMedia?.videos?.results.length > 0 ? (
+                <YouTubeModal
+                  video={heroMedia?.videos?.results.find(
+                    (video) => video.type === "Trailer",
+                  )}
+                  parentOpen={open}
+                  Component={({ setOpen }) => (
+                    <button
+                      onClick={() => setOpen(true)}
+                      className="text-accent-900-50 h-12 w-36 rounded-md bg-accent-300 font-extrabold"
+                    >
+                      Play
+                    </button>
+                  )}
+                />
+              ) : (
+                <a
+                  href={`https://www.imdb.com/title/${heroMedia.imdb_id}`}
+                  target={heroMedia.imdb_id && "_blank"}
+                >
+                  <button className="text-accent-900-50 h-12 w-36 rounded-md bg-accent-300 font-extrabold">
+                    Play
+                  </button>
+                </a>
+              )}
+              <Link
+                to={`${path_prefix}${heroMedia.id}`}
+                preventScrollReset={false}
               >
-                <button className="text-accent-900-50 h-12 w-36 rounded-md bg-accent-300 font-extrabold">
-                  Play
-                </button>
-              </a>
-              <Link to={`${path_prefix}${heroMedia.id}`} preventScrollReset={false}>
                 <button className="text-accent-900-50 flex h-12 w-36 items-center justify-evenly rounded-md bg-accent-100 font-extrabold opacity-50">
-                  <InformationCircleIcon className="w-8" />
+                  <HiOutlineInformationCircle className="w-8" />
                   More Info
                 </button>
               </Link>

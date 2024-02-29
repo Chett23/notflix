@@ -47,6 +47,20 @@ export const getDiscoverMovies = async (options, signal) => {
   return response.results;
 };
 
+export const getUpcomingMovies = async (options, signal) => {
+  const response = await fetch(
+    "https://api.themoviedb.org/3/movie/upcoming?lappend_to_response=video&anguage=en-US&page=1",
+    { ...options, signal },
+  )
+    .then((response) => response.json())
+    .catch((err) => {
+      if (err.message !== "The user aborted a request.") {
+        console.error(err.message);
+      }
+    });
+  return response.results;
+};
+
 //
 // Show Loaders
 //
@@ -117,6 +131,28 @@ export const getMediaDetails = async (options, media_type, media_id) => {
   return { ...response, media_type };
 };
 
+export const getSeasonDetails = async (
+  options,
+  media_type,
+  media_id,
+  season_id,
+) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/${media_type}/${media_id}/season/${season_id}?append_to_response=videos,credits,external_ids,account_states,,similar,reviews,images,recommendations,reviews&language=en-US`,
+    {
+      ...options,
+    },
+  )
+    .then((response) => response.json())
+    .catch((err) => {
+      if (err.message !== "The user aborted a request.") {
+        console.error(err.message);
+      }
+    });
+
+  return { ...response, media_type };
+};
+
 export const getProviders = async (options, media_type, media_id) => {
   const response = await fetch(
     `https://api.themoviedb.org/3/${media_type}/${media_id}/watch/providers`,
@@ -130,7 +166,33 @@ export const getProviders = async (options, media_type, media_id) => {
     });
   return {
     free: response.results?.US?.free || [],
+    stream: response.results?.US?.flatrate || [],
     ...response.results?.US,
+    flatrate: [],
+  };
+};
+
+export const getSeasonProviders = async (
+  options,
+  media_type,
+  media_id,
+  season_number,
+) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/${media_type}/${media_id}/season/${season_number}/watch/providers`,
+    { ...options },
+  )
+    .then((response) => response.json())
+    .catch((err) => {
+      if (err.message !== "The user aborted a request.") {
+        console.error(err.message);
+      }
+    });
+  return {
+    free: response.results?.US?.free || [],
+    stream: response.results?.US?.flatrate || [],
+    ...response.results?.US,
+    flatrate: [],
   };
 };
 
