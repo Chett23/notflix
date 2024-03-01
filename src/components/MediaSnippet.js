@@ -39,7 +39,7 @@ const MediaSnippet = ({ media }) => {
 
       <div className="flex min-w-full justify-between py-2 gap-2">
         {directors.length > 0 && (
-          <div className="flex flex-col flex-wrap items-start overflow-hidden hover:z-10 hover:overflow-visible [&:hover~*]:opacity-0">
+          <div className="flex flex-col flex-wrap items-start overflow-hidden hover:z-10 ">
             <span className="flex-1 font-bold text-font-100">
               {directors.length > 1 ? "Directors" : "Director"}
             </span>
@@ -53,7 +53,7 @@ const MediaSnippet = ({ media }) => {
           </div>
         )}
         {producers.length > 0 && (
-          <div className="flex flex-col flex-wrap items-start overflow-hidden hover:z-10 hover:overflow-visible">
+          <div className="flex flex-col flex-wrap items-start overflow-hidden hover:z-10">
             <span className="flex-1 font-bold text-font-100">
               {producers.length > 1 ? "Producers" : "Producer"}
             </span>
