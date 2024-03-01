@@ -62,7 +62,7 @@ export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
               {heroMedia?.overview}
             </p>
             <div className="flex flex-row gap-4">
-              {/* TODO: make the play button start a yourube iframe popup of the main trailer instead of auto play */}
+              
               {heroMedia?.videos?.results.length > 0 ? (
                 <YouTubeModal
                   video={heroMedia?.videos?.results.find(
