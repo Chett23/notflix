@@ -31,7 +31,7 @@ export const Movies = () => {
     );
   };
 
-  console.log(top)
+
 
   useEffect(() => {
     const controller = new AbortController();

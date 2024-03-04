@@ -35,7 +35,7 @@ export const MediaPage = () => {
             path_prefix={`../${media.media_type}/`}
           />
           {media?.credits?.cast.length > 0 && (
-            <PeopleCarosel people={media.credits.cast} heading={'Cast'} />
+            <PeopleCarosel people={media.credits.cast} heading={"Cast"} />
           )}
           {media?.seasons && (
             <SeasonCarosel seasons={media.seasons} header={"Seasons"} />

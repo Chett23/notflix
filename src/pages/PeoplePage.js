@@ -18,7 +18,6 @@ export async function PeopleLoader({ params }) {
 
 const PeoplePage = () => {
   const { person, trending } = useLoaderData();
-  console.log(person);
 
   return (
     <>

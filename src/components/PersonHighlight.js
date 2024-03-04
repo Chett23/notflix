@@ -64,7 +64,7 @@ const PersonHighlight = ({ person }) => {
           <span className="pt-2 font-bold text-font-100">Overview</span>
           <span className="scrollbar-hide max-h-48 overflow-y-scroll pb-2 text-left text-sm text-font-50">
             {person?.biography ||
-              `${person?.name} is known for her role${person.combined_credits.length > 0 ? "s" : ""} in ${person.combined_credits.cast.map((credit) => `${credit.title} (${credit.release_date.split("-")[0]})`)}`}
+              `${person?.name} is known for her role${person.combined_credits.length > 0 ? "s" : ""} in ${person.combined_credits.cast.map((credit) => credit.title && `${credit?.title} (${credit?.release_date?.split("-")[0]})`)}`}
           </span>
         </div>
       </div>

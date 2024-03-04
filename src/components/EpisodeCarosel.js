@@ -2,7 +2,7 @@ import React from "react";
 import { FaStar } from "react-icons/fa6";
 
 const EpisodeCarosel = ({ episodes, header }) => {
-  console.log(episodes);
+  
   return (
     <div className="flex w-full flex-col items-start">
       <span className="px-6 text-xl font-bold text-font-100">{header}</span>

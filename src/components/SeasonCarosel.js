@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const SeasonCarosel = ({ seasons, header }) => {
-  console.log(seasons);
+  
 
   return (
     <div className="flex w-full flex-col items-start">

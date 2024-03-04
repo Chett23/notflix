@@ -4,12 +4,13 @@ import { useDebouncedCallback } from "use-debounce";
 import { HiSearch } from "react-icons/hi";
 import { apiOptions } from "../Constants/data";
 import { getSearchResults } from "../utils/loaderFunctions";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const [showBar, setShowBar] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState({});
+  const navigate = useNavigate();
 
   const handleSearch = useDebouncedCallback(async (value) => {
     setSearchValue(value);
@@ -20,44 +21,44 @@ const SearchBar = () => {
   }, 300);
 
   return (
-    <div class="relative mx-auto pt-2 text-font-100">
+    <div className="relative mx-auto pt-2 text-font-100">
       {showBar ? (
         <>
           <input
-            className={`h-10 rounded-lg border bg-transparent px-5 pr-16 text-sm focus:outline-none`}
+            className={`h-10 rounded-lg border bg-transparent px-5 pr-10 text-sm focus:outline-none`}
             type="search"
             name="search"
             placeholder="Search"
             autoFocus
-            onf
+            onBlur={() => setShowBar(false)}
             onChange={(e) => handleSearch(e.target.value)}
           />
-          <button
-            onClick={() => setShowBar((prev) => !prev)}
-            type="submit"
-            class="absolute right-0 top-0 mr-4 mt-4"
-          >
+          <button type="submit" className="absolute right-0 top-0 mr-2 mt-4">
             <HiSearch className="h-6 w-6 text-font-50" />
           </button>
         </>
       ) : (
         <button
           onClick={() => {
-            setShowBar((prev) => !prev);
+            setShowBar(true);
           }}
           type="submit"
-          className="mr-4 mt-1.5"
+          className="mr-2 mt-1.5"
         >
           <HiSearch className="h-6 w-6 text-font-50" />
         </button>
       )}
       <div
-        className={`absolute ${searchResults.results && showBar && searchValue.length > 0 ? "visible" : "hidden"} top-14 z-10 w-full rounded-md bg-background-800 p-2`}
+        className={`absolute ${searchResults.results && showBar && searchValue?.length > 0 ? "visible" : "hidden"} scrollbar-hide top-14 z-10 max-h-96 w-full overflow-y-scroll rounded-md bg-background-800 p-2`}
       >
-        {searchResults?.results &&
+        {searchResults.results && searchResults?.results?.length == 0 ? (
+          <div className="rounded-md px-2 py-1 text-left">
+            These are not the droids you're looking for
+          </div>
+        ) : (
           searchResults?.results
-            .sort((a, b) => a.vote_count - b.vote_count)
-            .map((result) => {
+            ?.sort((a, b) => b.vote_count - a.vote_count)
+            .map((result, index) => {
               const media_type =
                 result.media_type === "person"
                   ? "people"
@@ -70,23 +71,26 @@ const SearchBar = () => {
                   result?.first_air_date?.split("-")[0]) ||
                 result?.air_date?.split("-")[0];
               return (
-                <Link
-                  to={`${media_type}/${result.id}`}
-                  onClick={() => {
-                    setSearchValue("");
-                    setShowBar(false);
-                  }}
-                >
+                <div key={result.id}>
                   <div
-                    className="cursor-pointer px-2 py-1 text-left hover:text-accent-500 hover hover:bg-background-900 rounded-md"
-                    key={result.id}
+                    onMouseDown={() => {
+                      setSearchValue("");
+                      setShowBar(false);
+                      navigate(`${media_type}/${result.id}`);
+                    }}
+                    className="hover cursor-pointer rounded-md px-2 py-1 text-left hover:bg-background-900 hover:text-accent-500"
                   >
                     {result.title || result.name}
                     {media_date && ` (${media_date})`}
                   </div>
-                </Link>
+                  {/* spacing bar under each result EXCEPT for the last result in the array */}
+                  {index !== searchResults?.results.length - 1 && (
+                    <hr className="opacity-25" />
+                  )}
+                </div>
               );
-            })}
+            })
+        )}
       </div>
     </div>
   );
