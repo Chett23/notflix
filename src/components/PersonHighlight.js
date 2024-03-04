@@ -1,4 +1,3 @@
-import { logDOM } from "@testing-library/react";
 import React from "react";
 
 const formatDate = (date) => {

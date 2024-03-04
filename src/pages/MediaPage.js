@@ -4,7 +4,7 @@ import { getMediaDetails, getProviders } from "../utils/loaderFunctions";
 import { apiOptions } from "../Constants/data";
 import { useLoaderData } from "react-router-dom";
 import MediaCarosel from "../components/MediaCarosel";
-import CastCarosel from "../components/CastCarosel";
+import PeopleCarosel from "../components/PeopleCarosel";
 import VideoCarosel from "../components/VideoCarosel";
 import SeasonCarosel from "../components/SeasonCarosel";
 import MediaHighlight from "../components/MediaHighlight";
@@ -22,8 +22,6 @@ export async function mediaPageLoader({ params }) {
   return { media, providers };
 }
 
-// TODO: hero media isnt changing when clicking on a media from the carousel while on mediapage. Id and url are accuratly changing.
-
 export const MediaPage = () => {
   const { media, providers } = useLoaderData();
 
@@ -37,7 +35,7 @@ export const MediaPage = () => {
             path_prefix={`../${media.media_type}/`}
           />
           {media?.credits?.cast.length > 0 && (
-            <CastCarosel castArray={media.credits.cast} />
+            <PeopleCarosel people={media.credits.cast} heading={'Cast'} />
           )}
           {media?.seasons && (
             <SeasonCarosel seasons={media.seasons} header={"Seasons"} />

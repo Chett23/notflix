@@ -202,7 +202,7 @@ export const getSeasonProviders = async (
 
 export const getPersonDetails = async (options, person_id) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/person/${person_id}?append_to_response=combined_credits,latest,external_ids&language=en-US`,
+    `https://api.themoviedb.org/3/person/${person_id}?append_to_response=combined_credits,latest,images,external_ids&language=en-US`,
     {
       ...options,
     },
@@ -214,4 +214,40 @@ export const getPersonDetails = async (options, person_id) => {
       }
     });
   return response;
+};
+
+export const getTrendingPeople = async (options) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/trending/person/day?language=en-US`,
+    {
+      ...options,
+    },
+  )
+    .then((response) => response.json())
+    .catch((err) => {
+      if (err.message !== "The user aborted a request.") {
+        console.error(err.message);
+      }
+    });
+  return response.results;
+};
+
+//
+// Search
+//
+
+export const getSearchResults = async (options, query) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=true&language=en-US&page=1`,
+    {
+      ...options,
+    },
+  )
+    .then((response) => response.json())
+    .catch((err) => {
+      if (err.message !== "The user aborted a request.") {
+        console.error(err.message);
+      }
+    });
+  return { query, ...response };
 };

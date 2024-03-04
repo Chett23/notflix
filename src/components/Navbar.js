@@ -17,7 +17,7 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`z-20 flex w-full flex-row justify-between bg-gradient-to-b from-background-950 md:fixed ${
+      className={`z-20 flex w-full flex-row justify-between bg-gradient-to-b h-20 from-background-950 md:fixed ${
         scrollPosition > 42 && " bg-background-950"
       } transition duration-300`}
     >
@@ -56,8 +56,8 @@ export const Navbar = () => {
         )}
       </div>
       <div className={"flex flex-row items-center space-x-4 p-4"}>
-        <HiSearch className="h-6 w-6 text-font-50" />
-        {/* <SearchBar /> */}
+        {/* <HiSearch className="h-6 w-6 text-font-50" /> */}
+        <SearchBar />
         <p className="text-sm text-font-50 ">Profile</p>
         <HiOutlineBell className={"h-6 w-6 text-font-50"} />
         <HiUser className="h-6 w-6 text-font-50" />
