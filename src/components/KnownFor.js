@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CreditCard from "./CreditCard";
+import { ScrollArrows } from "./ScrollArrows";
 
 const KnownFor = ({ person }) => {
   const [seeAll, setSeeAll] = useState(false);
@@ -32,14 +33,17 @@ const KnownFor = ({ person }) => {
         : a.order - b.order || b.vote_count - a.vote_count,
     );
 
-
   return (
     <div className="mx-auto flex min-h-72 w-full flex-col items-start p-4">
-      <span className="max-h-56 pb-2 text-lg font-bold text-font-100 xl:text-xl">
-        Known For:
-      </span>
+      <div className="flex w-full justify-between">
+        <span className="max-h-56 pb-2 text-lg font-bold text-font-100 xl:text-xl">
+          Known For:
+        </span>
+        {!seeAll && <ScrollArrows element_id={`KnownFor`} />}
+      </div>
       <div
         className={`${seeAll ? "min-h-96 flex-wrap" : "flex-nowrap"} scrollbar-hide flex max-w-full gap-4 overflow-x-scroll`}
+        id="KnownFor"
       >
         {credits.slice(0, seeAll ? credits.length : 12).map((credit) => (
           <CreditCard

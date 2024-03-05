@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SiBuymeacoffee } from "react-icons/si";
+import { SiBuymeacoffee, SiUpwork } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
 import { RiLinkedinFill } from "react-icons/ri";
 
@@ -28,6 +28,12 @@ export function Footer() {
         </a>
         <a href="https://www.buymeacoffee.com/chansendev" target="_blank">
           <SiBuymeacoffee className="size-6 rounded-sm bg-font-100 fill-background-950 p-[2px] hover:bg-accent-500" />
+        </a>
+        <a
+          href="https://www.upwork.com/freelancers/~013b43c108bba6edb7?viewMode=1"
+          target="_blank"
+        >
+          <SiUpwork className="size-6 rounded-sm bg-font-500 p-[2px] text-background-200 hover:bg-accent-500 dark:text-background-100" />
         </a>
       </div>
       <span className="self-center text-xs font-thin">
