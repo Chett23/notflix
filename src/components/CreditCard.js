@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa6";
 
 import { Link } from "react-router-dom";
 
-const CreditCard = ({ credit }) => {
+const CreditCard = ({ credit, creditSource }) => {
   return (
     <Link to={`../../${credit.media_type}/${credit.id}`}>
       <div className="flex h-48 w-64 gap-2 rounded-md bg-accent-800 bg-opacity-40">
@@ -31,14 +31,15 @@ const CreditCard = ({ credit }) => {
             </div>
             <span className="text-xs text-font-50">{credit.media_type}</span>
           </div>
-          <span className="max-w-32 truncate text-xs text-font-50">
-            {credit.character}
+          <span className="max-w-32 truncate text-xs text-font-50 hover:text-wrap">
+            {credit.character || credit.job}
           </span>
           <span className="text-xs text-font-50">
             {credit?.release_date?.split("-")[0] ||
               credit?.first_air_date?.split("-")[0]}{" "}
-            {credit.episode_count && <b>·</b>}{" "}
-            {credit.episode_count && `${credit.episode_count} eps`}
+            {creditSource == "cast" &&
+              credit.episode_count &&
+              `- ${credit.episode_count} eps`}
           </span>
         </div>
       </div>

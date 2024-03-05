@@ -41,7 +41,7 @@ const YouTubeModal = ({ video, Component }) => {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all">
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all min-w-[50svw] h-50 min-h-[50svh]">
                   <div className="bg-background-900 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <span
                       onClick={() => setOpen(false)}

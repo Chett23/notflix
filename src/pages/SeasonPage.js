@@ -1,9 +1,14 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import { apiOptions } from "../Constants/data";
-import { getSeasonDetails, getMediaDetails,getSeasonProviders } from "../utils/loaderFunctions";
-import CastCarosel from "../components/CastCarosel";
+import {
+  getSeasonDetails,
+  getMediaDetails,
+  getSeasonProviders,
+} from "../utils/loaderFunctions";
+import PeopleCarosel from "../components/PeopleCarosel";
 import EpisodeCarosel from "../components/EpisodeCarosel";
+import SeasonCarosel from "../components/SeasonCarosel";
 import MediaHighlight from "../components/MediaHighlight";
 import MediaCarosel from "../components/MediaCarosel";
 import ReviewCarosel from "../components/ReviewCarosel";
@@ -29,6 +34,7 @@ export async function seasonPageLoader({ params }) {
 
 export const SeasonPage = () => {
   const { season, media, seasonProviders } = useLoaderData();
+
   return (
     <div>
       {season?.id ? (
@@ -39,10 +45,13 @@ export const SeasonPage = () => {
             path_prefix={`../${media.media_type}/`}
           />
           {season?.credits?.cast.length > 0 && (
-            <CastCarosel castArray={season.credits.cast} />
+            <PeopleCarosel people={season.credits.cast} header={"Cast"} />
           )}
           {season?.episodes && (
             <EpisodeCarosel episodes={season.episodes} header={"Episodes"} />
+          )}
+          {media?.seasons && (
+            <SeasonCarosel seasons={media.seasons} header={"Other Seasons"} />
           )}
           {season?.videos?.results.length > 0 && (
             <VideoCarosel videoArray={season.videos.results} header={"Clips"} />

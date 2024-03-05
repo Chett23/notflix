@@ -1,4 +1,3 @@
-import { logDOM } from "@testing-library/react";
 import React from "react";
 
 const formatDate = (date) => {
@@ -11,13 +10,14 @@ const formatDate = (date) => {
 
 const PersonHighlight = ({ person }) => {
   const formattedDate = formatDate(person?.birthday);
+
   return (
     <div className="max-w-screen relative mx-auto max-h-[calc(100vh/7*5)] min-h-72 overflow-y-hidden">
       <img
         alt={person?.id}
         src={
           person &&
-          `https://image.tmdb.org/t/p/w1280/${person?.combined_credits?.cast[0].backdrop_path || person?.combined_credits?.cast[0].poster_path}`
+          `https://image.tmdb.org/t/p/w1280/${person?.combined_credits?.cast[0]?.backdrop_path || person?.combined_credits?.cast[0]?.poster_path || person?.combined_credits?.crew[0]?.backdrop_path}`
         }
         className="max-h-screen min-h-72 w-full self-center rounded-md opacity-30"
       />
@@ -65,7 +65,7 @@ const PersonHighlight = ({ person }) => {
           <span className="pt-2 font-bold text-font-100">Overview</span>
           <span className="scrollbar-hide max-h-48 overflow-y-scroll pb-2 text-left text-sm text-font-50">
             {person?.biography ||
-              `${person?.name} is known for her role${person.combined_credits.length > 0 ? "s" : ""} in ${person.combined_credits.cast.map((credit) => `${credit.title} (${credit.release_date.split("-")[0]})`)}`}
+              `${person?.name} is known for ${person.gender == 1 ? 'her' : person.gender == 2 ? 'his' : 'their'} role${person.combined_credits.length > 0 ? "s" : ""} in ${person.combined_credits.cast.map((credit) => credit.title && `${credit?.title} (${credit?.release_date?.split("-")[0]})`)}`}
           </span>
         </div>
       </div>

@@ -3,7 +3,6 @@ import React from "react";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 
 const ProviderSnippet = ({ providers, media }) => {
-  console.log(providers);
   return (
     <div className="pt-4 text-start">
       <a
@@ -26,7 +25,7 @@ const ProviderSnippet = ({ providers, media }) => {
                 key={`${media.id} - ${paymentMethod}`}
                 className="flex flex-col items-start"
               >
-                <span className="text-font-50 py-1">
+                <span className="py-1 text-font-50">
                   {paymentMethod.charAt(0).toUpperCase() +
                     paymentMethod.slice(1)}
                   :
@@ -45,7 +44,20 @@ const ProviderSnippet = ({ providers, media }) => {
             ),
         )
       ) : (
-        <div></div>
+        <div className="pt-10 text-left text-font-100">
+          Unfortunatly there is nowhere to watch this as of now, according to
+          the{" "}
+          <a
+            href="https://www.justwatch.com/"
+            target="_blank"
+            rel="noreferrer"
+            alt="Just Watch webpage"
+            className="hover:text-accent-500"
+          >
+            Just Watch
+          </a>{" "}
+          database. Please check back later.
+        </div>
       )}
     </div>
   );
