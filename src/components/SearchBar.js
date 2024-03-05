@@ -16,7 +16,7 @@ const SearchBar = () => {
     setSearchValue(value);
 
     const results = await getSearchResults(apiOptions, value);
-
+    
     setSearchResults(results);
   }, 300);
 
@@ -70,6 +70,7 @@ const SearchBar = () => {
                 (result?.first_air_date &&
                   result?.first_air_date?.split("-")[0]) ||
                 result?.air_date?.split("-")[0];
+
               return (
                 <div key={result.id}>
                   <div
@@ -78,8 +79,18 @@ const SearchBar = () => {
                       setShowBar(false);
                       navigate(`${media_type}/${result.id}`);
                     }}
-                    className="hover cursor-pointer rounded-md px-2 py-1 text-left hover:bg-background-900 hover:text-accent-500"
+                    className="hover flex cursor-pointer gap-2 rounded-md px-2 py-1 text-left hover:bg-background-900 hover:text-accent-500"
                   >
+                    <img
+                      src={
+                        result.profile_path
+                          ? `https://image.tmdb.org/t/p/w45/${result?.profile_path}`
+                          : result.poster_path
+                            ? `https://image.tmdb.org/t/p/w92/${result?.poster_path}`
+                            : `https://ui-avatars.com/api/?name=${result.name}&background=random`
+                      }
+                      className="h-12 w-8 rounded-md"
+                    />
                     {result.title || result.name}
                     {media_date && ` (${media_date})`}
                   </div>

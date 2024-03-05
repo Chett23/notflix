@@ -45,7 +45,7 @@ export const SeasonPage = () => {
             path_prefix={`../${media.media_type}/`}
           />
           {season?.credits?.cast.length > 0 && (
-            <PeopleCarosel people={season.credits.cast} heading={"Cast"} />
+            <PeopleCarosel people={season.credits.cast} header={"Cast"} />
           )}
           {season?.episodes && (
             <EpisodeCarosel episodes={season.episodes} header={"Episodes"} />

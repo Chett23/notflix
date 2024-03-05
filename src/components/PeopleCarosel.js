@@ -1,13 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ScrollArrows } from "./ScrollArrows";
 
-const PeopleCarosel = ({ people, heading }) => {
+const PeopleCarosel = ({ people, header }) => {
   return (
     <div className="flex w-full flex-col items-start">
-      <span className="p-6 text-xl font-bold text-font-100">{heading}</span>
-      <div className="scrollbar-hide flex w-full flex-row gap-4 overflow-x-scroll p-6 ">
+      <div className="flex w-full justify-between">
+        <span className="p-6 text-xl font-bold text-font-100">{header}</span>
+        <ScrollArrows element_id={`PeopleCarosel - ${header}`} />
+      </div>
+      <div
+        className="scrollbar-hide flex w-full flex-row gap-4 overflow-x-scroll p-6 "
+        id={`PeopleCarosel - ${header}`}
+      >
         {people.map((castMember, index) => (
-          // <a href="">
           <Link
             to={`../people/${castMember.id}`}
             key={`${castMember.id} - ${index}`}
@@ -27,7 +33,6 @@ const PeopleCarosel = ({ people, heading }) => {
               <span className="text-sm text-font-200">{castMember.name}</span>
             </div>
           </Link>
-          // </a>
         ))}
       </div>
     </div>

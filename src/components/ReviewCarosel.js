@@ -1,5 +1,7 @@
-import moment from "moment";
 import React from "react";
+import moment from "moment";
+
+import { ScrollArrows } from "./ScrollArrows";
 
 const ReviewCarosel = ({ reviewsArray, header }) => {
   const formatDate = (timestamp) => {
@@ -16,8 +18,15 @@ const ReviewCarosel = ({ reviewsArray, header }) => {
 
   return (
     <div className="flex w-full flex-col items-start">
-      <span className="p-6 text-xl font-bold text-font-100">{header}</span>
-      <div className="scrollbar-hide flex w-full flex-row gap-4 overflow-x-scroll px-6">
+      <div className="flex w-full justify-between">
+        <span className="p-6 text-xl font-bold text-font-100">{header}</span>
+        <ScrollArrows element_id={`ReviewCarosel - ${header}`} />
+
+      </div>
+      <div
+        className="scrollbar-hide flex w-full flex-row gap-4 overflow-x-scroll px-6"
+        id={`ReviewCarosel - ${header}`}
+      >
         {reviewsArray.map((review) => (
           <a
             href={review.url}

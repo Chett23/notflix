@@ -24,7 +24,7 @@ const PeoplePage = () => {
       <PersonHighlight person={person} />
       <KnownFor person={person} />
       {/* <ImageCarosel images={person.images.profiles} /> */}
-      <PeopleCarosel people={trending} heading={'Trending'}  />
+      <PeopleCarosel people={trending} header={'Trending'}  />
     </>
   );
 };

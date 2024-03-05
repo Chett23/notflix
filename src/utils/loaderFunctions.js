@@ -249,5 +249,12 @@ export const getSearchResults = async (options, query) => {
         console.error(err.message);
       }
     });
-  return { query, ...response };
+
+  return {
+    query,
+    ...response,
+    results: response.results.filter((result) =>
+      result.media_type !== "person" ? true : result.known_for.length > 0,
+    ),
+  };
 };
