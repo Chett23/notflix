@@ -7,7 +7,7 @@ const MediaHighlight = ({ media, providers }) => {
   const [showProviders, setShowProviders] = useState(true);
 
   return (
-    <div className="max-w-screen relative mx-auto max-h-[calc(100vh/7*5)] min-h-72 overflow-y-hidden">
+    <div className="max-w-screen relative mx-auto max-h-[calc(100vh/7*5)] min-h-[calc(100vh/7*5)] overflow-y-hidden">
       <img
         alt={media.id}
         src={

@@ -11,7 +11,6 @@ import YouTubeModal from "./YouTubeModal";
 
 export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
   const [heroMedia, setHeroMedia] = useState(baseMedia);
-  const [open, setOpen] = useState(false);
 
   const getMediaDetails = async (options, signal) =>
     await fetch(
@@ -43,7 +42,7 @@ export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
 
   return (
     Object.keys(heroMedia).length > 0 && (
-      <div className="relative mx-auto max-h-[calc(100vh/7*5)] min-h-72 overflow-y-hidden">
+      <div className="relative mx-auto max-h-[calc(100vh/7*5)] min-h-[calc(100vh/7*5)] overflow-y-hidden">
         <img
           alt={heroMedia.id}
           src={
@@ -62,13 +61,11 @@ export const HeroMedia = ({ baseMedia, path_prefix = "" }) => {
               {heroMedia?.overview}
             </p>
             <div className="flex flex-row gap-4">
-              
               {heroMedia?.videos?.results.length > 0 ? (
                 <YouTubeModal
                   video={heroMedia?.videos?.results.find(
                     (video) => video.type === "Trailer",
                   )}
-                  parentOpen={open}
                   Component={({ setOpen }) => (
                     <button
                       onClick={() => setOpen(true)}
