@@ -5,14 +5,14 @@ import { ScrollArrows } from "./ScrollArrows";
 const KnownFor = ({ person }) => {
   const [seeAll, setSeeAll] = useState(false);
   const credit_source =
-    person.combined_credits.cast.length == 0 ? "crew" : "cast";
+    person.combined_credits.cast.length === 0 ? "crew" : "cast";
 
   const credits = person.combined_credits[credit_source]
     .reduce((condenced_in_progress, credit) => {
       const credit_index = condenced_in_progress.findIndex(
         (item) => item.id === credit.id,
       );
-      const credit_type = credit_source == "cast" ? "character" : "job";
+      const credit_type = credit_source === "cast" ? "character" : "job";
       if (credit_index >= 0) {
         condenced_in_progress[credit_index] = {
           ...condenced_in_progress[credit_index],
@@ -28,7 +28,7 @@ const KnownFor = ({ person }) => {
     }, [])
     .reverse()
     .sort((a, b) =>
-      a.order == undefined
+      a.order === undefined
         ? 1
         : a.order - b.order || b.vote_count - a.vote_count,
     );
