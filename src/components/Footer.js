@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SiBuymeacoffee } from "react-icons/si";
+import { SiBuymeacoffee, SiUpwork } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
 import { RiLinkedinFill } from "react-icons/ri";
 
@@ -20,14 +20,33 @@ export function Footer() {
         </a>
       </span>
       <div className="flex justify-center gap-4 p-2">
-        <a href="https://linkedin.com/in/chester-hansen" target="_blank">
+        <a
+          href="https://linkedin.com/in/chester-hansen"
+          target="_blank"
+          rel="noreferrer"
+        >
           <RiLinkedinFill className="size-6 rounded-sm bg-font-100 fill-background-950 p-[2px] hover:bg-accent-500" />
         </a>
-        <a href="https://github.com/chett23/notflix" target="_blank">
+        <a
+          href="https://github.com/chett23/notflix"
+          target="_blank"
+          rel="noreferrer"
+        >
           <FaGithub className="size-6 rounded-sm bg-font-100 fill-background-950 p-[2px] hover:bg-accent-500" />
         </a>
-        <a href="https://www.buymeacoffee.com/chansendev" target="_blank">
+        <a
+          href="https://www.buymeacoffee.com/chansendev"
+          target="_blank"
+          rel="noreferrer"
+        >
           <SiBuymeacoffee className="size-6 rounded-sm bg-font-100 fill-background-950 p-[2px] hover:bg-accent-500" />
+        </a>
+        <a
+          href="https://www.upwork.com/freelancers/~013b43c108bba6edb7?viewMode=1"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <SiUpwork className="size-6 rounded-sm bg-font-100 fill-background-950 p-[2px] hover:bg-accent-500 dark:text-background-100" />
         </a>
       </div>
       <span className="self-center text-xs font-thin">

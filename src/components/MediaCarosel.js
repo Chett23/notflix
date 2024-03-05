@@ -14,7 +14,6 @@ const MediaCarosel = ({ mediaArray, header, path_prefix = "" }) => {
       <div className="flex w-full justify-between">
         <p className="text-xl font-bold text-font-100">{header}</p>
         <ScrollArrows element_id={`MediaCarosel - ${header}`} />
-
       </div>
       <div
         className="scrollbar-hide flex max-w-full gap-6 overflow-y-hidden overflow-x-scroll"
